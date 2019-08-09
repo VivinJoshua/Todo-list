@@ -1,0 +1,79 @@
+<html>
+<head>
+<!-- <link rel="stylesheet" type="text/css" href="todo.css"> -->
+<style media="screen">
+body
+{
+  margin:70px;
+  background-color:#000;
+  color:#fff;
+}
+h3
+{
+  color:yellow;
+  font-size:30px;
+}
+
+ul{
+  list-style-type: none;
+
+}
+li::before {
+ content: "\2022";
+ color: #ffffe6; /* Change the color */
+font-weight: bold; /* If you want it to be bold */
+display: inline-block; /* Needed to add space between the bullet and the text */
+width: 1em;
+}
+  li
+  {
+    font-size: 25px;
+    font-family: montserrat;
+    color:#fff;
+  }color:#fff;
+  input[type=text]
+  {
+    font-family: montserrat;
+    width: 20%;
+    height: 10px;
+    padding: 10px 14px;
+    margin: 3px 0;
+    border-radius: 30px;
+    border-bottom-style: none;
+
+  }
+  input[type=submit]
+  {
+    font-family: montserrat;
+  background-color:#DBD032;
+  color: #000000;
+  padding: 10px 14px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 30px;
+
+  }
+</style>
+</head>
+<body>
+<h3>TODO</h3>
+
+<ul>
+
+
+    {% for i in all_value %}
+      <li>{{ i.content }} <span>&nbsp</span>
+        <form action="/deletetodo/{{i.id}}/" style="display:inline-block;" method="post">{% csrf_token %}
+          <input type="submit" value="delete"></li>
+        </form>
+
+        {% endfor %}
+</ul>
+
+<form action="/addtodo/" method="post">{% csrf_token %}
+  <input type="text" name="content" placeholder="TODO" required>
+  <input type="submit" value="add">
+
+</form>
+</body>
+</html>
